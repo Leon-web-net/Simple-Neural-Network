@@ -39,10 +39,9 @@ mkdir build && cd build
 # Run CMake and build
 cmake ..
 cmake --build . --config Release
+```
 
-
-
-References & Credits
+## References & Credits
 
 This project was inspired by Samson Zhang neural network tutorial in python
 [Building a neural network FROM SCRATCH (no Tensorflow/Pytorch, just numpy & math)](https://youtu.be/w8yWXqWQYmU?si=z3q99MKA7Ig4fPc1)
@@ -52,5 +51,3 @@ This project was inspired by Samson Zhang neural network tutorial in python
 [Eigen Library](https://eigen.tuxfamily.org/index.php?title=Main_Page)
 
 [csvRead function concept from this C++ tutorial ](https://youtu.be/m118or4f0FE?si=Jhx_WEh-DisEJbiH)
-
-```
