@@ -1,0 +1,32 @@
+# Ignore build output
+/build/
+/Debug/
+/*.exe
+/*.out
+/*.obj
+/*.o
+/*.log
+
+# Ignore generated files
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+
+# Ignore Python cache if you run any scripts
+__pycache__/
+*.pyc
+
+# VSCode workspace settings (optional, only if you don’t want to share them)
+.vscode/
+
+# Temporary/test files
+*.tmp
+*.bak
+tempCodeRunnerFile.*
+
+#
+
+main_stats.cpp
+main_stats.exe
+
