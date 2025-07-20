@@ -4,6 +4,8 @@
 #include <Eigen/Dense>
 #include <filesystem>
 #include <iostream>
+#include <iomanip> 
+#include <omp.h>
 
 NeuralNetwork::NeuralNetwork(const unsigned int input_size_, const unsigned int hidden_size_, 
             const unsigned output_size_, const double learning_rate_, const std::filesystem::path& load_path)
@@ -141,6 +143,7 @@ void NeuralNetwork::updateParameters(const BackwardResult& grad){
 Eigen::RowVectorXi NeuralNetwork::getPredictions(const Eigen::MatrixXd& A2){
     Eigen::RowVectorXi predictions(A2.cols());
 
+    #pragma omp parallel for
     for(int i =0; i<A2.cols();i++){
         A2.col(i).maxCoeff(&predictions(i));
     }
@@ -162,6 +165,8 @@ double NeuralNetwork::getAccuracy(const Eigen::RowVectorXi& predictions,
 void NeuralNetwork::UpdateLearningRate(const double factor){
     assert(factor < 1 && factor > 0);
     learning_rate *= factor;
+
+     std::cout << std::fixed << std::setprecision(8);
     std::cout<<"Learning Rate updated by a factor "<<factor<<std::endl;
     std::cout<<"New Learning Rate "<<learning_rate<<std::endl;
     

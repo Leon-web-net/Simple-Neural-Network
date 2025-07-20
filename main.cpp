@@ -1,5 +1,7 @@
 #include "./includes/NeuralNetwork.hpp"
 #include "./includes/Model_IO.hpp"
+#include <unsupported/Eigen/CXX11/Tensor>
+
 #include <iostream>
 #include <fstream>
 #include <filesystem> 
@@ -7,6 +9,8 @@
 #include <Eigen/Dense>
 #include <Eigen/LU>
 #include <iomanip>
+#include <chrono>
+
 
 
 // ./Debug/main.exe
@@ -21,17 +25,21 @@ namespace {
     // const string TEST_PATH = "./MNIST_handwritten_dataset/test.csv";
     const string TEST_PATH = "./mnist_mock_test.csv";
     const string MODEL_DIR = "./model_params/";
+    // const string MODEL_DIR = "";
     const float VALIDATION_SPLIT = 0.2f;
 
     const int INPUT_SIZE = 784;
-    const int HIDDEN_SIZE = 10;
+    const int HIDDEN_SIZE = 128;
     const int OUTPUT_SIZE = 10;
-    const int EPOCHS = 300;
+    const int EPOCHS = 200;
     const double INITIAL_LR = 0.1;
 
-    const int LR_DECAY_STEP = 50;
+    const int LR_DECAY_STEP = 20;
     const double LR_DECAY_FACTOR = 0.75;
-    const int LR_DECAY_START = 50;
+    const int LR_DECAY_START = 40;
+    
+    const bool IS_THREADS = true;
+    const int NUM_THREADS = 16;
 }
 
 
@@ -80,12 +88,12 @@ void trainModel(NeuralNetwork& nn, const MatrixXd& X_train, const MatrixXd& Y_tr
             if (acc > best_accuracy) {
                 best_accuracy = acc;
                 nn.saveModel(MODEL_DIR);
+                cout<<"Model saved "<<MODEL_DIR<<endl;
             }
         }
 
         if (epoch >= LR_DECAY_START && epoch % LR_DECAY_STEP == 0) {
             nn.UpdateLearningRate(LR_DECAY_FACTOR);
-            cout << "Learning rate decayed at epoch " << epoch << endl;
         }
     }
 }
@@ -114,6 +122,17 @@ std::vector<int> testModel(NeuralNetwork& nn, const Eigen::MatrixXd& images) {
 }
 
 int main() {
+    
+    if(IS_THREADS){
+        Eigen::initParallel();
+        int num_threads = std::thread::hardware_concurrency();
+        cout<<"Number of threads available "<<num_threads<<endl;
+        if(num_threads == 0) num_threads = 1;  // fallback
+        if(num_threads>=NUM_THREADS) num_threads = NUM_THREADS; 
+        Eigen::setNbThreads(num_threads);
+        cout<<"Using "<<NUM_THREADS<<" logic cores"<<endl;
+    }
+
     MatrixXd X_train, Y_train, X_dev;
     Eigen::RowVectorXi Y_dev;
 
@@ -126,9 +145,17 @@ int main() {
 
     
     NeuralNetwork nn(INPUT_SIZE, HIDDEN_SIZE, OUTPUT_SIZE, INITIAL_LR, MODEL_DIR);
-    cout<<"Neural Network Initialised"<<endl;
+    // cout<<"Neural Network Initialised"<<endl;
+    
+    // auto start = std::chrono::high_resolution_clock::now();
 
     // trainModel(nn, X_train, Y_train, X_dev, Y_dev);
+
+    // auto end = std::chrono::high_resolution_clock::now();
+
+    // std::chrono::duration<double> duration = end - start;
+    // std::cout << "Time taken: " << duration.count() << " seconds\n";
+
     MatrixXd X_test;
 
 
@@ -141,6 +168,7 @@ int main() {
     }else{
         return EXIT_FAILURE;
     }
+
 
 
     return EXIT_SUCCESS;
