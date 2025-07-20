@@ -10,6 +10,7 @@ A simple feedforward neural network implemented from scratch in **C++** using **
   - One hidden layer
   - Sigmoid activation
   - Softmax output layer
+- Multithreaded prediction using OpenMP
 - Custom training loop with:
   - Forward and backward propagation
   - Gradient descent
@@ -23,6 +24,7 @@ A simple feedforward neural network implemented from scratch in **C++** using **
 - [Eigen 3](https://eigen.tuxfamily.org) (header-only)
 - C++17 or higher
 - CMake ≥ 3.10
+- OpenMP (for multithreading support)
 
 ---
 
