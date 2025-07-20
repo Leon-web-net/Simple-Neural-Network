@@ -28,6 +28,23 @@ A simple feedforward neural network implemented from scratch in **C++** using **
 
 ---
 
+## Results
+
+Trained on MNIST with the following configuration:
+
+- Input size: 784
+- Hidden layer size: 128
+- Output size: 10
+- Epochs: 200
+- Initial learning rate: 0.1
+- Learning rate decay: 0.75 every 20 epochs (starting at epoch 40)
+- Validation split: 20%
+- Multithreading enabled with OpenMP (16 threads)
+
+**Final validation accuracy:** 81.94%
+
+---
+
 ## 🛠️ Build Instructions
 
 ```bash
