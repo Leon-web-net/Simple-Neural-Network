@@ -65,8 +65,8 @@ cmake --build . --config Release
 ## Future Work
 
 - **Expand network architecture:** Add more hidden layers and experiment with different activation functions to improve accuracy and model capacity.
-- **Visualization tools:** Integrate visualizations to display CSV image data and training metrics (e.g., loss and accuracy curves) for better insight into model performance.
-- **Advanced optimization:** Implement additional training techniques such as momentum, Adam optimizer, or batch normalization.
+- **Visualisation tools:** Integrate visualisations to display CSV image data and training metrics (e.g., loss and accuracy curves) for better insight into model performance.
+- **Optimisation:** Implement additional training techniques such as momentum, Adam optimizer, or batch normalisation.
 
 ---
 
