@@ -1,10 +1,10 @@
-# 🧠 NN_CPP - Neural Network in C++ for MNIST Classification
+# NN_CPP - Neural Network in C++ for MNIST Classification
 
 A simple feedforward neural network implemented from scratch in **C++** using **Eigen** for matrix operations. The model is trained on the **MNIST** dataset for handwritten digit classification.
 
 ---
 
-## 🚀 Features
+## Features
 
 - Feedforward neural network with:
   - One hidden layer
@@ -19,7 +19,7 @@ A simple feedforward neural network implemented from scratch in **C++** using **
 - MNIST data preprocessing
 - CMake-based build system
 
-## 🔧 Dependencies
+## Dependencies
 
 - [Eigen 3](https://eigen.tuxfamily.org) (header-only)
 - C++17 or higher
@@ -45,7 +45,7 @@ Trained on MNIST with the following configuration:
 
 ---
 
-## 🛠️ Build Instructions
+##  Build Instructions
 
 ```bash
 # Clone the repo
