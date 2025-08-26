@@ -85,7 +85,6 @@ cmake .. -G "MinGW Makefiles" # or "Visual Studio 16 2019" if using MSVC
    cmake --build . --config Release
    ```
 
-```
 ---
 
 ## Future Work
@@ -116,4 +115,7 @@ This project was inspired by Samson Zhang neural network tutorial in python
 - Added **OpenCV visualization**.
 - Updated **accuracy to 97.39%** at 25 epochs.
 - Reflected hyperparameters (`BATCH_SIZE`, `EPOCHS`, `LR`).
+
+```
+
 ```
