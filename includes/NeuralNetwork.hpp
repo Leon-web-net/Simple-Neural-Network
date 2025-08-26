@@ -7,6 +7,8 @@ struct ForwardResult {
     Eigen::MatrixXd A1;
     Eigen::MatrixXd Z2;
     Eigen::MatrixXd A2;
+    Eigen::MatrixXd Z3;
+    Eigen::MatrixXd A3;
 };
 
 struct BackwardResult{
@@ -14,13 +16,15 @@ struct BackwardResult{
     Eigen::MatrixXd db1;
     Eigen::MatrixXd dW2;
     Eigen::MatrixXd db2;
+    Eigen::MatrixXd dW3;
+    Eigen::MatrixXd db3;
 };
 
 class NeuralNetwork {
 public:
-    NeuralNetwork(const unsigned int input_size, const unsigned int hidden_size, 
-        const unsigned int output_size, const double learning_rate,
-        const std::filesystem::path& load_path = "");
+    NeuralNetwork(const unsigned int input_size, const unsigned int hidden1_size,
+         const unsigned int hidden2_size, const unsigned int output_size, 
+         const double learning_rate, const std::filesystem::path& load_path = "");
 
     // Forward pass returns all intermediates in a struct
     ForwardResult forward(const Eigen::MatrixXd& X) const;
@@ -30,7 +34,7 @@ public:
 
     void updateParameters(const BackwardResult& grad);
 
-    Eigen::RowVectorXi getPredictions(const Eigen::MatrixXd& A2);
+    Eigen::RowVectorXi getPredictions(const Eigen::MatrixXd& A3);
 
     double NeuralNetwork::getAccuracy(const Eigen::RowVectorXi& predictions, 
     const Eigen::RowVectorXi& true_labels);
@@ -40,17 +44,20 @@ public:
     const Eigen::VectorXd& getb1() const { return b1; }
     const Eigen::MatrixXd& getW2() const { return W2; }
     const Eigen::VectorXd& getb2() const { return b2; }
+    const Eigen::MatrixXd& getW3() const { return W3; }
+    const Eigen::VectorXd& getb3() const { return b3; }
 
     void saveModel(const std::string& SAVE_PATH);
     void NeuralNetwork::UpdateLearningRate(const double factor);
 
 private:
-    Eigen::MatrixXd W1, W2;
-    Eigen::VectorXd b1, b2;
+    Eigen::MatrixXd W1, W2, W3;
+    Eigen::VectorXd b1, b2, b3;
 
     double learning_rate; // non const if decay or schedule
     const unsigned int input_size;
-    const unsigned int hidden_size;
+    const unsigned int hidden1_size;
+    const unsigned int hidden2_size;
     const unsigned int output_size;
 
     static Eigen::MatrixXd ReLU(const Eigen::MatrixXd& x);

@@ -1,33 +1,30 @@
-import csv
-import random
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import os
 
-def generate_mock_data(rows, include_labels=True):
-    data = []
-    for _ in range(rows):
-        row = []
-        if include_labels:
-            row.append(random.randint(0, 9))  # Random label
-        row.extend(random.randint(0, 255) for _ in range(784))  # Pixel values
-        data.append(row)
-    return data
+# Paths
+test_path = "./MNIST_handwritten_dataset/test.csv"  # adjust if needed
+output_dir = "./MNIST_images"
+os.makedirs(output_dir, exist_ok=True)
 
-def write_csv(filename, data, include_header=True):
-    with open(filename, mode="w", newline="") as file:
-        writer = csv.writer(file)
-        if include_header:
-            header = ["label"] + [f"pixel{i}" for i in range(784)] if len(data[0]) == 785 else [f"pixel{i}" for i in range(784)]
-            writer.writerow(header)
-        writer.writerows(data)
+# Load CSV (assuming first col = label, rest = pixels)
+df = pd.read_csv(test_path,)
+print("Dataset shape:", df.shape)
 
-# === Paths ===
-train_path = "./mnist_mock_train.csv"
-test_path = "./mnist_mock_test.csv"
+# Take 20 samples only
+samples = df.sample(20, random_state=42).reset_index(drop=True)
 
-# === Generate and Save ===
-train_data = generate_mock_data(10, include_labels=True)
-test_data = generate_mock_data(10, include_labels=False)
+for i in range(len(samples)):
 
-write_csv(train_path, train_data)
-write_csv(test_path, test_data)
+    pixels = samples.iloc[i, :].values.reshape(28, 28)
 
-print(f"Mock training and test files created:\n- {train_path}\n- {test_path}")
+    plt.imshow(pixels, cmap="gray")
+    plt.axis("off")
+
+    # Save as PNG
+    save_path = os.path.join(output_dir, f"MNIST_digit_{i}.png")
+    plt.savefig(save_path, bbox_inches="tight", pad_inches=0)
+    plt.close()
+
+print(f"✅ Saved {len(samples)} PNG images to {output_dir}")

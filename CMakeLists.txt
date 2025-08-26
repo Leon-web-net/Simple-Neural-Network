@@ -7,10 +7,11 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # Add Eigen headers (adjust this path to where your Eigen is!)
 include_directories("C:\\Program Files\\CPP_LIB\\eigen-3.4.0")
-
-# Include your headers
 include_directories("${CMAKE_SOURCE_DIR}/includes")
 
+# Open cv
+set(OpenCV_DIR "C:/Program Files/CPP_LIB/opencv/build")
+find_package(OpenCV REQUIRED)
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "C:\\Users\\letio\\NN_CPP\\")
 
@@ -22,8 +23,10 @@ add_executable(main
 )
 
 #  Enable OpenMP
-find_package(OpenMP REQUIRED)
-
 if(OpenMP_CXX_FOUND)
+    find_package(OpenMP REQUIRED)
     target_link_libraries(main PRIVATE OpenMP::OpenMP_CXX)
 endif()
+
+target_include_directories(main PRIVATE ${OpenCV_INCLUDE_DIRS})
+target_link_libraries(main PRIVATE ${OpenCV_LIBS})
