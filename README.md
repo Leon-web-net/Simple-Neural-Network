@@ -53,8 +53,11 @@ Trained on MNIST with the following configuration:
 ## 🛠️ Build Instructions
 
 1. Clone the repo
-   git clone https://github.com/Leon-web-net/Simple-Neural-Network.git
-   cd NN_CPP
+
+```
+ git clone https://github.com/Leon-web-net/Simple-Neural-Network.git
+ cd NN_CPP
+```
 
 2. Install dependencies
 
@@ -65,15 +68,24 @@ Trained on MNIST with the following configuration:
    Example: add C:/CPP_LIB/opencv/build/x64/vc16/bin to system PATH
 
 4. Create build directory
-   mkdir build
-   cd build
+
+```
+ mkdir build
+ cd build
+```
 
 5. Run CMake to configure the project
-   cmake .. -G "MinGW Makefiles" # or "Visual Studio 16 2019" if using MSVC
+
+```
+cmake .. -G "MinGW Makefiles" # or "Visual Studio 16 2019" if using MSVC
+```
 
 6. Build the project
+   ```
    cmake --build . --config Release
+   ```
 
+```
 ---
 
 ## Future Work
@@ -104,3 +116,4 @@ This project was inspired by Samson Zhang neural network tutorial in python
 - Added **OpenCV visualization**.
 - Updated **accuracy to 97.39%** at 25 epochs.
 - Reflected hyperparameters (`BATCH_SIZE`, `EPOCHS`, `LR`).
+```
