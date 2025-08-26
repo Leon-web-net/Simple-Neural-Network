@@ -4,7 +4,7 @@ A feedforward neural network implemented from scratch in **C++** using **Eigen**
 
 ---
 
-## Features
+## 🚀 Features
 
 - Feedforward neural network with:
   - **Two hidden layers** (128 → 64)
@@ -21,7 +21,7 @@ A feedforward neural network implemented from scratch in **C++** using **Eigen**
 - **OpenCV integration** to visualize test images with predicted labels
 - CMake-based build system
 
-## Dependencies
+## 🔧 Dependencies
 
 - [Eigen 3](https://eigen.tuxfamily.org) (header-only)
 - OpenCV (for image visualization)
@@ -50,7 +50,7 @@ Trained on MNIST with the following configuration:
 
 ---
 
-##  Build Instructions
+## 🛠️ Build Instructions
 
 1. Clone the repo
    git clone https://github.com/Leon-web-net/Simple-Neural-Network.git
