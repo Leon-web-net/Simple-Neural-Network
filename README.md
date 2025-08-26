@@ -115,7 +115,3 @@ This project was inspired by Samson Zhang neural network tutorial in python
 - Added **OpenCV visualization**.
 - Updated **accuracy to 97.39%** at 25 epochs.
 - Reflected hyperparameters (`BATCH_SIZE`, `EPOCHS`, `LR`).
-
-```
-
-```
