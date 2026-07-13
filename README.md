@@ -55,8 +55,8 @@ Trained on MNIST with the following configuration:
 1. Clone the repo
 
 ```
- git clone https://github.com/Leon-web-net/Simple-Neural-Network.git
- cd NN_CPP
+git clone https://github.com/Leon-web-net/Simple-Neural-Network.git
+
 ```
 
 2. Install dependencies
